@@ -1,0 +1,14 @@
+# Too big, use alpine instead
+FROM ubuntu
+
+# Do we need vim, curl, and all other packages?
+RUN apt-get update && \
+    apt-get install -y wget curl vim software-properties-common nginx php7.0 php7.0-fpm php7.0-cli php7.0-curl php7.0-mysql php7.0-mbstring php7.0-xml php7.0-zip composer && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+VOLUME ["src"]
+
+WORKDIR src
+
+CMD ["composer", "install"]
